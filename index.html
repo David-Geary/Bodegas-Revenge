@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<!-- Head.........................................................-->
+
+<head>
+<title>Bodega's Revenge</title>
+
+<meta name='apple-mobile-web-app-capable' content='yes'>
+<meta name='apple-mobile-web-app-status-bar-style'
+            content='black-translucent'>
+
+<link rel='stylesheet' href='bodegas-revenge.css'/>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<!-- Body.........................................................-->
+
+<body>
+<!-- Music.....................................................--> 
+
+<audio id='music' preload='auto'>
+<source src='music/music.ogg' type='audio/ogg'>
+<source src='music/music.mp3' type='audio/mp3'>
+</audio>
+
+<!-- Sound effects..............................................--> 
+
+<audio id='audio-sprites' preload='auto'>
+<source src='sound-effects/audio-sprites.ogg' type='audio/ogg'>
+<source src='sound-effects/audio-sprites.mp3' type='audio/mp3'>
+</audio>
+
+<!-- Arena.....................................................-->
+
+<div id='arena'>
+
+<!-- High scores............................................ -->
+
+<div id='high-score-toast'>
+<p class='title'>High score!</p>
+
+Enter your name:
+
+<input id='high-score-name' 
+class='snailbait-textfield'>
+
+<input id='high-score-add-score' 
+type='button' value='add my score' disabled='true'>
+
+<input id='high-score-new-game' 
+type='button' value='new game'>
+
+<p id='previous-high-scores-title'>Previous High Scores</p>
+
+<div id='previous-high-scores'> 
+<ol id='high-score-list'></ol>
+</div>
+
+</div>
+
+<!-- Credits...............................................-->
+
+<div id='credits' class='dialog'>
+<div class='heading'>Credits</div>
+
+<hr></hr>
+
+<div class='credit'>
+<div id='art-title' class='title'>~ Art ~</div>
+
+<div class='attribution'><b>
+<a href='http://lea.verou.me/css3patterns'>CSS3 Patterns Gallery</a>:
+</b> Design by Atle Mo. Code by Lea Verou.
+</div>
+
+<div class='attribution'><b>
+<a href='http://bit.ly/kNzDVc'>Replica Island</a>:
+</b> All graphics
+</div>
+</div>
+
+<div class='credit'>
+<div id='sound-and-music-title' class='title'>~ Sound and Music ~</div>
+
+<div class='attribution'>
+<a href='http://bit.ly/LFtwr8'>Pete Marquardt:</a>
+Soundtrack from soundclick.com
+</div>
+
+<div class='attribution'>
+<a href='http://bit.ly/kNzDVc'>Replica Island:</a>
+Sound effects
+</div>
+</div> <!-- end of credit -->
+
+<p>
+<a id='tweet' href="" data-count="none" 
+data-via="davidgeary"
+hashtags="#html5" target="_blank"
+class='tweet-link'>
+Tweet my score</a>
+
+<a id='new-game-link' href='#'>Play again</a>
+</p>
+
+</div> <!-- end of credits -->
+
+<!-- Running slowly........................................-->
+
+<div id='running-slowly'>
+
+<h1>Bodega's Revenge is running slowly</h1>
+
+<hr/>
+
+<p id='slowly-warning'></p>
+
+<p>A wide range of applications, from video players to 
+backup software, can slow this game down. For best results, hide all other windows on your desktop and close graphics intensive apps when you play HTML5 games.
+</p>
+
+<p>You should also upgrade your browser to the latest version to make sure that it has hardware accelerated HTML5 Canvas. Any version of Chrome starting with version 18, for example, has hardware accelerated
+Canvas. Here is a link to the 
+<a href='http://www.google.com/chrome/'>latest version of Chrome</a>.
+</p>
+
+<a id='slowly-okay' href='#'>
+Okay
+</a>
+
+<a  id='slowly-dont-show' href='#'>
+Do not show this warning again
+</a>
+</div>
+
+<canvas id='bullet-canvas' width='450' height='30'>
+Your browser does not support HTML5 Canvas.
+</canvas>
+
+<!-- Score .................................................-->
+
+<div id='score'>0</div>
+
+<!-- Toast..................................................-->
+
+<div id='toast'></div>
+
+<!-- Loading screen........................................-->
+
+<div id='loading'>
+<div id='loading-title'>Loading...</div>
+<img id='loading-animated-gif'/> <!-- no src attribute -->
+</div>
+
+<div id='bodega-mobile-welcome'>
+<p>Shoot birds before they get behind the turret. Every time a bird goes behind the turret you lose a bullet. Good luck!</p>
+
+<p>Slide a finger up or down to rotate the turret counter-clockwise or clockwise, respectively. Tap the screen to shoot the turret.</p>
+
+<p><a href='#' id='bodega-mobile-start'>Start</a></p>
+</div>
+
+<div id='welcome'>
+Shoot birds before they get behind the turret. Every time a bird goes behind the turret you lose a bullet. Good luck!
+
+<div id='welcome-instructions'> 
+<p><span class='instruction-keys'>&larr; / d</span> : rotate turret CCW</p>
+<p><span class='instruction-keys'>&rarr; / k </span> : rotate turret CW</p>
+<p><span class='instruction-keys'>spacebar</span> : shoot</p>
+</div>
+
+<p><a href='#' id='start'>Start</a></p>
+</div>
+
+<!-- The game canvas........................................-->
+
+<canvas id='game-canvas' width='800' height='400'>
+Your browser does not support HTML5 Canvas.
+</canvas>
+
+<!-- The ruler canvas for the developer backdoor.........-->
+
+<canvas id='ruler-canvas' width='800' height='20'>
+Your browser does not support HTML5 Canvas.
+</canvas>
+
+<!-- Sound and music.....................................-->
+
+<div id='sound-and-music'>
+<div id='sound-checkbox-div' class='checkbox-div'>
+Sound <input id='sound-checkbox' type='checkbox' checked/>
+</div>
+
+<div class='checkbox-div'>
+Music <input id='music-checkbox' type='checkbox' checked/>
+</div>
+</div>
+
+<!-- Instructions........................................-->
+
+<div id='instructions'>
+<div class='keys'>
+&larr; / d 
+<div class='explanation'>rotate turret CCW</div>
+&rarr; / k
+<div class='explanation'>rotate turret CW</div>
+</div>
+
+<div class='keys'>
+spacebar <div class='explanation'>shoot</div>
+</div>
+</div>
+
+<div id='bodega-mobile-instructions'>
+<div class='keys'>
+Slide up
+<div class='explanation'>rotate turret CCW</div>
+Slide down
+<div class='explanation'>rotate turret CW</div>
+</div>
+
+<div class='keys'>
+Tap <div class='explanation'>shoot</div>
+</div>
+</div>
+
+<!-- Copyright...........................................-->
+
+<div id='copyright'> &copy; 2012 David Geary</div>
+</div>
+
+<!-- JavaScript................................................-->
+
+<script src='js/requestNextAnimationFrame.js'></script>
+<script src='js/sprites.js'></script>
+<script src='js/behaviors/cellSwitch.js'></script>
+<script src='js/behaviors/cycle.js'></script>
+<script src='js/stopwatch.js'></script>
+<script src='js/animationTimer.js'></script>
+<script src='js/timeSystem.js'></script>
+<!--<script src='http://corehtml5canvas.com:98/socket.io/socket.io.js'></script>-->
+<script src='bodegas-revenge.js'></script>
+  </body>
+</html>
